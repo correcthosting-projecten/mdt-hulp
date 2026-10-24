@@ -589,8 +589,9 @@ jobs:
       - name: Rename rustdesk
         if: env.UPLOAD_ARTIFACT == 'true'
         run: |
-          for name in MD-Tradingsystems-Hulp*??.dmg; do
-              mv "$name" "${name%%.dmg}-${{ matrix.job.arch }}.dmg"
+          # Alleen de ondertekende DMG heeft nog geen architectuur in de naam; de ongetekende wel.
+          for name in MD-Tradingsystems-Hulp-${{ env.VERSION }}.dmg; do
+              if [ -f "$name" ]; then mv "$name" "${name%%.dmg}-${{ matrix.job.arch }}.dmg"; fi
           done
 
       - name: Publish DMG package
