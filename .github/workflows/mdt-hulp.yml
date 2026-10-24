@@ -1,0 +1,22 @@
+name: MD Tradingsystems Hulp bouwen
+
+# Handmatig starten (Actions → "MD Tradingsystems Hulp bouwen" → Run workflow). Bouwt de Windows-
+# (x64) en macOS-versie (Intel + Apple Silicon) en zet ze als prerelease onder de opgegeven tag.
+on:
+  workflow_dispatch:
+    inputs:
+      upload-tag:
+        description: "Release-tag voor de downloads"
+        required: true
+        default: "mdt-hulp-1.5.0"
+
+permissions:
+  contents: write
+
+jobs:
+  bouwen:
+    uses: ./.github/workflows/flutter-build.yml
+    secrets: inherit
+    with:
+      upload-artifact: true
+      upload-tag: ${{ inputs.upload-tag }}
