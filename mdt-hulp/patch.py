@@ -72,8 +72,9 @@ for cargo in ('Cargo.toml', 'libs/portable/Cargo.toml'):
         ('description = "RustDesk Remote Desktop"', f'description = "{APP_NAAM}"', 1),
         ('ProductName = "RustDesk"', f'ProductName = "{APP_NAAM}"', 1),
         ('OriginalFilename = "rustdesk.exe"', 'OriginalFilename = "MD-Tradingsystems-Hulp.exe"', 1),
+        # Taakbeheer en de UAC-vraag tonen de FileDescription als programmanaam.
+        ('FileDescription = "RustDesk Remote Desktop"', f'FileDescription = "{APP_NAAM}"', 1),
     ])
-vervang('Cargo.toml', [('FileDescription = "RustDesk Remote Desktop"', f'FileDescription = "{APP_NAAM}"', 1)])
 vervang('flutter/windows/runner/Runner.rc', [
     ('VALUE "CompanyName", "Purslane Tech Pte. Ltd." "\\0"', f'VALUE "CompanyName", "{BEDRIJF}" "\\0"', 1),
     ('VALUE "FileDescription", "RustDesk Remote Desktop" "\\0"', f'VALUE "FileDescription", "{APP_NAAM}" "\\0"', 1),
