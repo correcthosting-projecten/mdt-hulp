@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hulp op afstand · MD Tradingsystems</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Download MD Tradingsystems Hulp, dan kijkt Dennis met je mee.">
+<meta property="og:title" content="Hulp op afstand · MD Tradingsystems">
+<meta property="og:description" content="Download de app, open hem en klik op Accepteren. Dan kijkt Dennis met je mee.">
+<style>
+  :root { --blauw: #0a3d91; --licht: #1f8ff0; --tekst: #0f1b2d; --grijs: #5b6b80; --vlak: #f3f7fc; --rand: #d9e4f2; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--tekst); background: #fff; }
+  header { background: linear-gradient(135deg, var(--licht), var(--blauw)); color: #fff; padding: 36px 16px 44px; }
+  header .binnen, main { max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 10px; }
+  header p { margin: 0; font-size: 18px; opacity: .95; }
+  main { padding: 24px 16px 48px; }
+  ol.stappen { list-style: none; padding: 0; margin: 0 0 28px; counter-reset: s; }
+  ol.stappen li { counter-increment: s; position: relative; padding: 4px 0 14px 48px; }
+  ol.stappen li::before { content: counter(s); position: absolute; left: 0; top: 2px; width: 34px; height: 34px; border-radius: 50%; background: var(--blauw); color: #fff; font-weight: 700; display: grid; place-items: center; }
+  .knoppen { display: grid; gap: 12px; margin: 8px 0 28px; }
+  a.knop { display: block; text-decoration: none; padding: 16px 18px; border-radius: 12px; border: 2px solid var(--rand); color: var(--tekst); background: var(--vlak); }
+  a.knop strong { display: block; font-size: 18px; }
+  a.knop span { color: var(--grijs); font-size: 15px; }
+  a.knop.aanbevolen { border-color: var(--licht); background: #e8f3ff; }
+  a.knop.aanbevolen strong::after { content: "  ← jouw computer"; color: var(--licht); font-weight: 600; font-size: 15px; }
+  details { border: 1px solid var(--rand); border-radius: 12px; padding: 12px 16px; margin: 0 0 12px; background: #fff; }
+  summary { cursor: pointer; font-weight: 600; }
+  details ol { margin: 10px 0 4px; padding-left: 22px; }
+  .klein { color: var(--grijs); font-size: 14px; margin-top: 32px; }
+  .klein a { color: var(--grijs); }
+</style>
+</head>
+<body>
+<header><div class="binnen">
+  <h1>Hulp op afstand</h1>
+  <p>Met deze app kijkt Dennis van MD Tradingsystems met je mee en helpt hij je verder. Hij kan alleen meekijken als jij dat goedkeurt.</p>
+</div></header>
+<main>
+  <ol class="stappen">
+    <li><strong>Download de app</strong> voor jouw computer hieronder.</li>
+    <li><strong>Open de app.</strong> Je hoeft niets te installeren.</li>
+    <li><strong>Klik op Accepteren</strong> zodra Dennis verbinding maakt. Stoppen kan altijd, met één klik.</li>
+  </ol>
+
+  <div class="knoppen">
+    <a class="knop" id="windows" href="https://github.com/correcthosting-projecten/mdt-hulp/releases/download/mdt-hulp-1.5.0/MD-Tradingsystems-Hulp-1.5.0-x86_64.exe">
+      <strong>Windows</strong><span>Windows 10 en 11</span></a>
+    <a class="knop" id="mac-arm" href="https://github.com/correcthosting-projecten/mdt-hulp/releases/download/mdt-hulp-1.5.0/MD-Tradingsystems-Hulp-1.5.0-aarch64.dmg">
+      <strong>Mac met Apple-chip</strong><span>M1, M2, M3, M4 en nieuwer</span></a>
+    <a class="knop" id="mac-intel" href="https://github.com/correcthosting-projecten/mdt-hulp/releases/download/mdt-hulp-1.5.0/MD-Tradingsystems-Hulp-1.5.0-x86_64.dmg">
+      <strong>Mac met Intel-processor</strong><span>Macs van vóór eind 2020</span></a>
+  </div>
+
+  <details>
+    <summary>Op een Mac: eenmalig twee schuifjes aanzetten</summary>
+    <ol>
+      <li>Open de app. Hij vraagt om toestemming voor <strong>Schermopname</strong> en <strong>Toegankelijkheid</strong>.</li>
+      <li>Klik op de knop in de app; Systeeminstellingen opent dan op de goede plek.</li>
+      <li>Zet het schuifje bij <strong>MD Tradingsystems Hulp</strong> aan en vul het wachtwoord van je Mac in.</li>
+      <li>Kies bij Schermopname <strong>Stop en open opnieuw</strong>.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>Op Windows: "Windows heeft uw pc beschermd"?</summary>
+    <ol>
+      <li>Klik op <strong>Meer info</strong>.</li>
+      <li>Klik op <strong>Toch uitvoeren</strong>.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>Op een iPhone of iPad</summary>
+    <p>Daar helpt Dennis je via FaceTime: hij belt je, jij deelt je scherm en keurt de bediening goed.</p>
+  </details>
+
+  <p class="klein">Vragen? Stuur Dennis gerust een bericht via WhatsApp. ·
+    De app is gebouwd op <a href="https://github.com/rustdesk/rustdesk">RustDesk</a> (open source, AGPL-3.0);
+    <a href="https://github.com/correcthosting-projecten/mdt-hulp">broncode van deze versie</a>.</p>
+</main>
+<script>
+  // Beste gok voor de eigen computer markeren; alle knoppen blijven zichtbaar.
+  (function () {
+    var ua = navigator.userAgent, id = null;
+    if (/Windows/i.test(ua)) id = 'windows';
+    else if (/Macintosh|Mac OS X/i.test(ua)) {
+      id = 'mac-intel';
+      try {
+        var c = document.createElement('canvas').getContext('webgl');
+        var ext = c && c.getExtension('WEBGL_debug_renderer_info');
+        var gpu = ext ? c.getParameter(ext.UNMASKED_RENDERER_WEBGL) : '';
+        if (/Apple/i.test(gpu) && !/Intel|AMD|Radeon/i.test(gpu)) id = 'mac-arm';
+      } catch (e) {}
+    }
+    var el = id && document.getElementById(id);
+    if (el) { el.classList.add('aanbevolen'); el.parentNode.insertBefore(el, el.parentNode.firstChild); }
+  })();
+</script>
+</body>
+</html>
