@@ -82,8 +82,8 @@ vervang('flutter/windows/runner/Runner.rc', [
 ])
 
 taalbestand('src/lang/nl.rs', {
-    'config_acc': f'Zodat we je computer op afstand kunnen bedienen, moet je {APP_NAAM} toestemming geven voor Toegankelijkheid.',
-    'config_screen': f'Zodat we met je kunnen meekijken, moet je {APP_NAAM} toestemming geven voor Schermopname.',
+    'config_acc': f'Om uw computer op afstand te kunnen bedienen, moet u {APP_NAAM} toestemming geven voor Toegankelijkheid.',
+    'config_screen': f'Om met u mee te kunnen kijken, moet u {APP_NAAM} toestemming geven voor Schermopname.',
 })
 taalbestand('src/lang/en.rs', {})
 
