@@ -322,10 +322,6 @@ jobs:
           pip3 install requests argparse
           BASE_URL=${{ env.SIGN_BASE_URL }} SECRET_KEY=${{ secrets.SIGN_SECRET_KEY }} python3 res/job.py sign_files ./rustdesk/
 
-      - name: "MDT Hulp: ondertekende instellingen meepakken"
-        shell: bash
-        run: cp mdt-hulp/custom.txt ./rustdesk/custom.txt && ls -la ./rustdesk/custom.txt
-
       - name: Build self-extracted executable
         shell: bash
         if: env.UPLOAD_ARTIFACT == 'true'
@@ -538,7 +534,6 @@ jobs:
       - name: "MDT Hulp: instellingen, naam en bundle-id in de app"
         run: |
           D=./flutter/build/macos/Build/Products/Release
-          cp mdt-hulp/custom.txt "$D/RustDesk.app/Contents/Resources/custom.txt"
           P="$D/RustDesk.app/Contents/Info.plist"
           /usr/libexec/PlistBuddy -c "Set :CFBundleName MD Tradingsystems Hulp" "$P"
           /usr/libexec/PlistBuddy -c "Delete :CFBundleDisplayName" "$P" 2>/dev/null || true
@@ -547,7 +542,6 @@ jobs:
           mv "$D/RustDesk.app" "$D/MD Tradingsystems Hulp.app"
           codesign --force --deep --sign - "$D/MD Tradingsystems Hulp.app"
           codesign --verify --deep --strict "$D/MD Tradingsystems Hulp.app"
-          ls -la "$D/MD Tradingsystems Hulp.app/Contents/Resources/custom.txt"
 
       - name: create unsigned dmg
         if: env.UPLOAD_ARTIFACT == 'true'
