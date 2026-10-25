@@ -19,8 +19,6 @@ BEDRIJF = 'MD Tradingsystems'
 SERVER = 'hulp.correcthosting.nl'
 # Publieke sleutel van hbbs op hulp.correcthosting.nl (id_ed25519.pub).
 SERVER_SLEUTEL = '8eKUABvoygDLjnEENYiFRxLD71il4qSu04ls+wYhstA='
-# Publieke sleutel waarmee custom.txt is ondertekend (privésleutel staat alleen op de jump).
-CONFIG_SLEUTEL = 'ipHCaB0XiW4aub2OmLPhv17T4fVA7aQxj4kUxsgonxw='
 
 
 def vervang(pad, vervangingen):
@@ -63,9 +61,54 @@ vervang('libs/hbb_common/src/config.rs', [
     ('pub const RS_PUB_KEY: &str = "OeVuKk5nlHiXp+APNn0Y3pC1Iwpwn44JGqrQCsWqmBw=";',
      f'pub const RS_PUB_KEY: &str = "{SERVER_SLEUTEL}";', 1),
 ])
+# De instellingen zitten vast in de app (custom.json). Op Windows sloot RustDesk 1.5.0 zichzelf direct af
+# zodra hij een ondertekend custom.txt controleerde (ook de officiele build; getest 25 okt 2026), dus geen
+# custom.txt en geen handtekeningcontrole: elke aanroep van read_custom_client past de ingebakken JSON toe.
 vervang('src/common.rs', [
-    ('const KEY: &str = "5Qbwsde3unUcJBtrx9ZkvUmwFNoExHzpryHuPUdqlWM=";',
-     f'const KEY: &str = "{CONFIG_SLEUTEL}";', 1),
+    ("""pub fn load_custom_client() {
+    #[cfg(debug_assertions)]
+    if let Ok(data) = std::fs::read_to_string("./custom.txt") {
+        read_custom_client(data.trim());
+        return;
+    }
+    let Some(path) = std::env::current_exe().map_or(None, |x| x.parent().map(|x| x.to_path_buf()))
+    else {
+        return;
+    };
+    #[cfg(target_os = "macos")]
+    let path = path.join("../Resources");
+    let path = path.join("custom.txt");
+    if path.is_file() {
+        let Ok(data) = std::fs::read_to_string(&path) else {
+            log::error!("Failed to read custom client config");
+            return;
+        };
+        read_custom_client(&data.trim());
+    }
+}
+""", """pub fn load_custom_client() {
+    // MD Tradingsystems Hulp: altijd de ingebakken instellingen (mdt-hulp/custom.json).
+    read_custom_client("");
+}
+""", 1),
+    ("""pub fn read_custom_client(config: &str) {
+    let Ok(data) = decode64(config) else {
+        log::error!("Failed to decode custom client config");
+        return;
+    };
+    const KEY: &str = "5Qbwsde3unUcJBtrx9ZkvUmwFNoExHzpryHuPUdqlWM=";
+    let Some(pk) = get_rs_pk(KEY) else {
+        log::error!("Failed to parse public key of custom client");
+        return;
+    };
+    let Ok(data) = sign::verify(&data, &pk) else {
+        log::error!("Failed to dec custom client config");
+        return;
+    };
+""", """pub fn read_custom_client(_config: &str) {
+    // MD Tradingsystems Hulp: ingebakken instellingen in plaats van een ondertekend custom.txt.
+    let data: &[u8] = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/mdt-hulp/custom.json"));
+""", 1),
 ])
 for cargo in ('Cargo.toml', 'libs/portable/Cargo.toml'):
     vervang(cargo, [
